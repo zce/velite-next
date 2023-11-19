@@ -17,15 +17,8 @@ async function getPostBySlug(slug: string) {
 
 export async function generateMetadata({ params }: PostProps): Promise<Metadata> {
   const post = await getPostBySlug(params.slug)
-
-  if (!post) {
-    return {}
-  }
-
-  return {
-    title: post.title,
-    description: post.description
-  }
+  if (post == null) return {}
+  return { title: post.title, description: post.description }
 }
 
 export async function generateStaticParams(): Promise<PostProps['params'][]> {
@@ -38,9 +31,7 @@ export async function generateStaticParams(): Promise<PostProps['params'][]> {
 export default async function PostPage({ params }: PostProps) {
   const post = await getPostBySlug(params.slug)
 
-  if (!post) {
-    notFound()
-  }
+  if (post == null) notFound()
 
   return (
     <article className="prose py-6 dark:prose-invert">

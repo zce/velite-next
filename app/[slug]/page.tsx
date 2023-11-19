@@ -11,21 +11,14 @@ interface PageProps {
 }
 
 async function getPageBySlug(slug: string) {
-  const posts = await db.posts()
-  return posts.find(post => post.slug === slug)
+  const pages = await db.pages()
+  return pages.find(page => page.slug === slug)
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const page = await getPageBySlug(params.slug)
-
-  if (!page) {
-    return {}
-  }
-
-  return {
-    title: page.title,
-    description: page.description
-  }
+  if (page == null) return {}
+  return { title: page.title }
 }
 
 export async function generateStaticParams(): Promise<PageProps['params'][]> {
@@ -38,16 +31,13 @@ export async function generateStaticParams(): Promise<PageProps['params'][]> {
 export default async function PagePage({ params }: PageProps) {
   const page = await getPageBySlug(params.slug)
 
-  if (!page) {
-    notFound()
-  }
+  if (page == null) notFound()
 
   return (
     <article className="prose py-6 dark:prose-invert">
       <h1>{page.title}</h1>
-      {page.description && <p className="text-xl">{page.description}</p>}
       <hr />
-      <div className="prose" dangerouslySetInnerHTML={{ __html: page.content }}></div>
+      <div className="prose" dangerouslySetInnerHTML={{ __html: page.body }}></div>
     </article>
   )
 }

@@ -9,14 +9,6 @@ const slugify = (input: string) =>
 const icon = s.enum(['github', 'instagram', 'medium', 'twitter', 'youtube'])
 const count = s.object({ total: s.number(), posts: s.number() }).default({ total: 0, posts: 0 })
 
-const meta = s
-  .object({
-    title: s.string().optional(),
-    description: s.string().optional(),
-    keywords: s.array(s.string()).optional()
-  })
-  .default({})
-
 export default defineConfig({
   root: 'content',
   output: {
@@ -93,10 +85,9 @@ export default defineConfig({
           featured: s.boolean().default(false),
           categories: s.array(s.string()).default(['Journal']),
           tags: s.array(s.string()).default([]),
-          meta: meta,
           metadata: s.metadata({ age: 20 }),
           summary: s.excerpt({ length: 100 }),
-          excerpt: s.excerpt({ separator: 'more', format: 'html' }),
+          excerpt: s.excerpt({ separator: 'more' }),
           content: s.markdown()
         })
         .transform(data => ({ ...data, permalink: `/blog/${data.slug}` }))
