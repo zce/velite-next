@@ -1,30 +1,7 @@
-# Next.js + Velite
+// import { build } from 'velite'
 
-A template with Next.js 13 app dir, [Velite](https://github.com/zce/velite), Tailwind CSS and dark mode.
+process.env.TZ = 'Asia/Shanghai'
 
-start Velite in npm script with `npm-run-all`:
-
-**package.json**:
-
-```json
-{
-  "scripts": {
-    "dev:content": "velite --watch",
-    "build:content": "velite --clean",
-    "dev:next": "next dev",
-    "build:next": "next build",
-    "dev": "run-p dev:*",
-    "build": "run-s build:*",
-    "start": "next start"
-  }
-}
-```
-
-start Velite with `next dev` and `next build` commands.
-
-**next.config.js**:
-
-```javascript
 /** @type {import('next').NextConfig} */
 module.exports = {
   // othor next config here...
@@ -48,4 +25,3 @@ class VeliteWebpackPlugin {
     })
   }
 }
-```
