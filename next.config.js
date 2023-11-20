@@ -1,7 +1,3 @@
-// import { build } from 'velite'
-
-process.env.TZ = 'Asia/Shanghai'
-
 /** @type {import('next').NextConfig} */
 module.exports = {
   // othor next config here...
