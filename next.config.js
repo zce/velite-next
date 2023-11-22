@@ -9,7 +9,7 @@ module.exports = {
 
 class VeliteWebpackPlugin {
   static started = false
-  apply(compiler) {
+  apply(/** @type {import('webpack').Compiler} */ compiler) {
     // executed three times in nextjs
     // twice for the server (nodejs / edge runtime) and once for the client
     compiler.hooks.beforeCompile.tap('VeliteWebpackPlugin', async () => {

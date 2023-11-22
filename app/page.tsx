@@ -11,7 +11,7 @@ export default async function Home() {
           <Link href={`/posts/${post.slug}`}>
             <h2>{post.title}</h2>
           </Link>
-          {post.excerpt && <p>{post.excerpt}</p>}
+          <p>{post.summary}</p>
         </article>
       ))}
     </div>
